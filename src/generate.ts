@@ -47,52 +47,47 @@ const getStoryboard = ({
   const b = (parseInt(hex[5] + hex[6], 16) / 255).toPrecision(15);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17147" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
-    <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17120"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-    </dependencies>
-    <scenes>
-        <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
-            <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="BootSplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="3lX-Ut-9ad">
-                                <rect key="frame" x="${(375 - width) / 2}" y="${
-    (667 - height) / 2
-  }" width="${width}" height="${height}"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                </accessibility>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="${r}" green="${g}" blue="${b}" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <accessibility key="accessibilityConfiguration">
-                            <accessibilityTraits key="traits" notEnabled="YES"/>
-                        </accessibility>
-                        <constraints>
-                            <constraint firstItem="3lX-Ut-9ad" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fh9-Fy-1nT"/>
-                            <constraint firstItem="3lX-Ut-9ad" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="nvB-Ic-PnI"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
-        </scene>
-    </scenes>
-    <resources>
-        <image name="${xcassetName}" width="${width}" height="${height}"/>
-    </resources>
-</document>
+  <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+      <device id="retina6_1" orientation="portrait" appearance="light"/>
+      <dependencies>
+          <deployment identifier="iOS"/>
+          <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+          <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+      </dependencies>
+      <scenes>
+          <!--View Controller-->
+          <scene sceneID="EHf-IW-A2E">
+              <objects>
+                  <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                      <view key="view" autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="Ze5-6b-2t3">
+                          <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                          <autoresizingMask key="autoresizingMask"/>
+                          <subviews>
+                              <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BootSplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="E0D-XB-KZC">
+                                  <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                              </imageView>
+                          </subviews>
+                          <color key="backgroundColor" red="${r}" green="${g}" blue="${b}" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                          <accessibility key="accessibilityConfiguration">
+                              <accessibilityTraits key="traits" notEnabled="YES"/>
+                          </accessibility>
+                          <constraints>
+                              <constraint firstItem="E0D-XB-KZC" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="SLE-HM-XqT"/>
+                              <constraint firstAttribute="bottom" secondItem="E0D-XB-KZC" secondAttribute="bottom" id="Ws6-od-jIS"/>
+                              <constraint firstAttribute="trailing" secondItem="E0D-XB-KZC" secondAttribute="trailing" id="cIb-aV-Gzn"/>
+                              <constraint firstItem="E0D-XB-KZC" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="zPb-vd-hNo"/>
+                          </constraints>
+                      </view>
+                  </viewController>
+                  <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+              </objects>
+              <point key="canvasLocation" x="0.0" y="0.0"/>
+          </scene>
+      </scenes>
+      <resources>
+          <image name="${xcassetName}" width="960" height="960"/>
+      </resources>
+  </document>
 `;
 };
 
@@ -102,7 +97,7 @@ const bootSplashXml = `<?xml version="1.0" encoding="utf-8"?>
     <item android:drawable="@color/${androidColorName}" />
 
     <item>
-        <bitmap android:src="@mipmap/${logoFileName}" android:gravity="center" />
+        <bitmap android:src="@mipmap/${logoFileName}" android:scaleType="centerCrop" />
     </item>
 </layer-list>
 `;

@@ -1,10 +1,13 @@
-# 🚀 react-native-bootsplash
+# 🚀 react-native-bootsplash-fullscreen
 
 <a href="https://github.com/sponsors/zoontek">
   <img align="right" width="160" alt="This library helped you? Consider sponsoring!" src=".github/funding-octocat.svg">
 </a>
 
-Show a bootsplash during app startup. Hide it when you are ready.
+Show a fullscreen bootsplash during app startup. Hide it when you are ready.
+
+## Note
+This version of the library is a customization of original zoontek/react-native-bootsplash to display fullscreen, centered and croped image (maintaining its aspect-ratio), and also it sets both status bar and navigation bar to be full transparent for both iOS ans Android. So if you want to display a more typical centered logo image as bootsplash, then do not use this library but the original.<br><br>
 
 [![npm version](https://badge.fury.io/js/react-native-bootsplash.svg)](https://www.npmjs.org/package/react-native-bootsplash)
 [![npm](https://img.shields.io/npm/dt/react-native-bootsplash.svg)](https://www.npmjs.org/package/react-native-bootsplash)
@@ -30,9 +33,9 @@ For 0.59-, you should use [`jetify -r`](https://github.com/mikehardy/jetifier/bl
 ## Installation
 
 ```bash
-$ npm install --save react-native-bootsplash
+$ npm install --save @fondakogb/bootsplash-fullscreen
 # --- or ---
-$ yarn add react-native-bootsplash
+$ yarn add @fondakogb/bootsplash-fullscreen
 ```
 
 Don't forget going into the `ios` directory to execute a `pod install`.
@@ -51,7 +54,7 @@ Add this line to your `ios/Podfile` file, then run `pod install`.
 ```bash
 target 'YourAwesomeProject' do
   # …
-  pod 'RNBootSplash', :path => '../node_modules/react-native-bootsplash'
+  pod 'RNBootSplash', :path => '../node_modules/@fondakogb-bootsplash-fullscreen'
 end
 ```
 
@@ -60,8 +63,8 @@ end
 1. Add the following lines to `android/settings.gradle`:
 
 ```gradle
-include ':react-native-bootsplash'
-project(':react-native-bootsplash').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bootsplash/android')
+include ':react-native-bootsplash-fullscreen'
+project(':react-native-bootsplash-fullscreen').projectDir = new File(rootProject.projectDir, '../node_modules/@fondakogb-bootsplash-fullscreen/android')
 ```
 
 2. Add the implementation line to the dependencies in `android/app/build.gradle`:
@@ -69,7 +72,7 @@ project(':react-native-bootsplash').projectDir = new File(rootProject.projectDir
 ```gradle
 dependencies {
   // ...
-  implementation project(':react-native-bootsplash')
+  implementation project(':react-native-bootsplash-fullscreen')
 }
 ```
 
@@ -202,6 +205,11 @@ Set the `BootSplash.storyboard` as launch screen file:
 
 ```java
 import android.os.Bundle; // <- add this necessary import
+import android.os.Build; // <- add this necessary import
+import android.view.Window;  // <- add this necessary import
+import android.view.WindowManager;  // <- add this necessary import
+import android.view.View; // <- add this necessary import
+import android.graphics.Color; // <- add this necessary import
 
 import com.facebook.react.ReactActivity;
 import com.zoontek.rnbootsplash.RNBootSplash; // <- add this necessary import
@@ -212,8 +220,23 @@ public class MainActivity extends ReactActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    // add following 12 lines to obtain both status bar and navigation bar transparent:
+    Window w = getWindow();
+    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+      w.setStatusBarColor(Color.parseColor("#50000000"));
+    } else {
+      w.setStatusBarColor(Color.TRANSPARENT);
+    }
+    if ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
+      w.setNavigationBarColor(Color.parseColor("#50000000"));
+    } else {
+      w.setNavigationBarColor(Color.TRANSPARENT);
+    }
+    w.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+    // end of lines necessary for transparent status bar &  navigation bar
+
     super.onCreate(savedInstanceState);
-    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this); // <- display the generated bootsplash.xml drawable over our MainActivity
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this); // <- add to display the generated bootsplash.xml drawable over our MainActivity
   }
 ```
 
@@ -224,9 +247,12 @@ As Android will not create our main activity before launching the app, we need t
 ```xml
 <resources>
 
-  <!-- Base application theme -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Your base theme customization -->
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <!-- Choose right foreground color e.g. for status bar text -->
+    <item name="android:textColor">#000000</item>
+    <!-- Avoid initial stretched bootsplash (it cannot calculates correct aspect ratio) -->
+    <item name="android:windowDisablePreview">true</item>
   </style>
 
   <!-- Add the following lines (BootTheme should inherit from AppTheme) -->
@@ -242,7 +268,7 @@ As Android will not create our main activity before launching the app, we need t
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.rnbootsplashexample">
+  package="com.yourapplicationpackage">
 
   <!-- … -->
 

@@ -3,10 +3,11 @@ package com.zoontek.rnbootsplash;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.view.View;
+//import android.view.View; // <-- comment zoontek version 
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.ImageView;  // <-- add fullscreen centercrop
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
@@ -55,9 +56,13 @@ public class RNBootSplashModule extends ReactContextBaseJavaModule implements Li
 
   private static LinearLayout getLayout(@NonNull Activity activity, LayoutParams params) {
     LinearLayout layout = new LinearLayout(activity);
-    View view = new View(activity);
+    
+    //View view = new View(activity); // <-- comment zoontek version
+    //view.setBackgroundResource(mDrawableResId); // <-- comment zoontek version
+    ImageView view = new ImageView(activity);  // add fullscreen centercrop
+    view.setImageResource(mDrawableResId);  // add fullscreen centercrop
+    view.setScaleType(ImageView.ScaleType.CENTER_CROP);  // add fullscreen centercrop
 
-    view.setBackgroundResource(mDrawableResId);
     layout.setId(R.id.bootsplash_layout_id);
     layout.setLayoutTransition(null);
     layout.setOrientation(LinearLayout.VERTICAL);
